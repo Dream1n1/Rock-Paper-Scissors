@@ -47,9 +47,9 @@ function game() {
         if (round == win) {
             console.log(round);
             player_score++;
-            i--;
             console.log('Your score: '+ player_score);
             console.log('Computer score: '+ computer_score);
+            i--;
         } else if (round == loss) {
             console.log(round);
             computer_score++;
