@@ -1,5 +1,5 @@
-// return a random string using math.random()
 
+// return a random string using Math.random()
 // This returns the computer's random choice
 function computerPlay() {
     let rdm = (Math.floor(Math.random()*100));
@@ -41,28 +41,28 @@ function game() {
     let computer_score = 0;
     let game_round = 1;
     for (let i = 1; i < 6; i++) {
-        playerSelection = prompt('ROCK PAPER OR SCISSORS: ') //even when a player gets 5 it executes again 
+        playerSelection = prompt('ROCK PAPER OR SCISSORS: ')
         console.log('Round :------------------------' + game_round + '---------------------------');
         round = playRound(playerSelection);
-        if (round == win && computer_score <= 4 && player_score <= 4) {
+        if (round == win) {
             console.log(round);
             player_score++;
             i--;
             console.log('Your score: '+ player_score);
             console.log('Computer score: '+ computer_score);
-        } else if (round == loss && computer_score <= 4 && player_score <= 4) {
+        } else if (round == loss) {
             console.log(round);
             computer_score++;
             console.log('Your score: '+ player_score);
             console.log('Computer score: '+ computer_score);
             i--;
-        } else if (round == tie && computer_score <= 4 && player_score <= 4){
+        } else if (round == tie){
             console.log(round);
             console.log('Your score: '+ player_score);
             console.log('Computer score: '+ computer_score);
             i--;
             game_round--;
-        } else if (round == wrong && computer_score <= 4 && player_score <= 4){
+        } else if (round == wrong){
             console.log(wrong)
             i--;
         }
