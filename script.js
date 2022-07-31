@@ -1,5 +1,3 @@
-
-// return a random string using Math.random()
 // This returns the computer's random choice
 function computerPlay() {
     let rdm = (Math.floor(Math.random()*100));
@@ -12,72 +10,70 @@ function computerPlay() {
     }
 }
 
-let loss = "You Lose!";
-let win = "You Win!";
-let tie = "Tie!";
-let wrong = "Wrong! choose either Rock, Paper or scissors";
-//This function returns who's the winner of the round
+let player_score = 0;
+let computer_score = 0;
+
+//This function returns who's the winner of the round and the game
 function playRound(playerSelection, computerSelection = computerPlay()) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
-    if (playerSelection === 'rock' && computerSelection === 'paper') {
-        return loss;
+    if(player_score == 5 || computer_score == 5) {
+        return;
+    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+        results.textContent = 'Loss';
+        computer_score++;
+        if (computer_score == 5) final.textContent = "I'm sorry you lost.";
+        count.textContent = 'Your score: ' + player_score.toString() + ', Computer score: ' + computer_score.toString();
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        return loss;
+        results.textContent = 'Loss';
+        computer_score++;
+        if (computer_score == 5) final.textContent = "I'm sorry you lost.";
+        count.textContent = 'Your score: ' + player_score.toString() + ', Computer score: ' + computer_score.toString();
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        return loss;
-    } else if (playerSelection !== 'paper' && playerSelection !== 'rock' && playerSelection !== 'scissors') {
-        return wrong;
+        results.textContent = 'Loss';
+        computer_score++;
+        if (computer_score == 5) final.textContent = "I'm sorry you lost.";
+        count.textContent = 'Your score: ' + player_score.toString() + ', Computer score: ' + computer_score.toString();
     } else if (playerSelection === computerSelection) {
-        return tie;
+        results.textContent = 'Tie';
+        count.textContent = 'Your score: ' + player_score.toString() + ', Computer score: ' + computer_score.toString();        
     } else {
-        return win;
-    }
-}
-
-// first to 5
-function game() {
-    let player_score = 0;
-    let computer_score = 0;
-    let game_round = 1;
-    for (let i = 1; i < 6; i++) {
-        playerSelection = prompt('ROCK PAPER OR SCISSORS: ')
-        console.log('Round :------------------------' + game_round + '---------------------------');
-        round = playRound(playerSelection);
-        if (round == win) {
-            console.log(round);
-            player_score++;
-            console.log('Your score: '+ player_score);
-            console.log('Computer score: '+ computer_score);
-            i--;
-        } else if (round == loss) {
-            console.log(round);
-            computer_score++;
-            console.log('Your score: '+ player_score);
-            console.log('Computer score: '+ computer_score);
-            i--;
-        } else if (round == tie){
-            console.log(round);
-            console.log('Your score: '+ player_score);
-            console.log('Computer score: '+ computer_score);
-            i--;
-            game_round--;
-        } else if (round == wrong){
-            console.log(wrong)
-            i--;
-        }
-        if (computer_score == 5 || player_score == 5) {
-            i = i+6;
-            console.log('Gamer over!');
-        }
-        game_round++;
-    }
-    if (player_score > computer_score) {
-        return 'Congrats you won against the computer!!!'
-    } else if (player_score < computer_score) {
-        return 'Well guess what you lost💀';
+        results.textContent = 'Win';
+        player_score++;
+        if (player_score == 5) final.textContent = 'You Won! Congrats!';
+        count.textContent = 'Your score: ' + player_score.toString() + ', Computer score: ' + computer_score.toString();
     }
 }
 
 
-console.log(game())
+
+//DOM
+const btn1 = document.querySelector('#rock')
+const btn2 = document.querySelector('#paper')
+const btn3 = document.querySelector('#scissors')
+
+
+btn1.addEventListener('click', () => {
+    playerSelection = 'rock';
+    playRound(playerSelection);
+})
+btn2.addEventListener('click', () => {
+    playerSelection = 'paper';
+    playRound(playerSelection);
+})
+btn3.addEventListener('click', () => {
+    playerSelection = 'scissors';
+    playRound(playerSelection);
+    })
+
+
+const container = document.querySelector('#container');
+
+const results = document.createElement('p');
+container.appendChild(results);
+
+const count = document.createElement('p');
+container.appendChild(count);
+
+const final = document.createElement('p');
+container.appendChild(final);
